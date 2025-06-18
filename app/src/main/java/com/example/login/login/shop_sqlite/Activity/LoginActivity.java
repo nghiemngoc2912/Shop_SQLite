@@ -44,15 +44,9 @@ public class LoginActivity extends AppCompatActivity {
                 txterr.setText("Password is empty, please input password");
                 passwordInput.requestFocus();
             } else {
-                userViewModel.getUserByUsernameAndPassword(username, password).observe(this, existingUser -> {
-                    if (existingUser == null) {
-                        User newUser = new User(username, password);
-                        userViewModel.insert(newUser);
-                        txterr.setText("Account created successfully");
-                    } else {
-                        txterr.setText("This account already exists!");
-                    }
-                });
+                User newUser = new User(username, password);
+                userViewModel.insert(newUser);
+                txterr.setText("Account created successfully");
             }
         });
         loginButton.setOnClickListener(v -> {
@@ -66,7 +60,6 @@ public class LoginActivity extends AppCompatActivity {
                 txterr.setText("Password is empty, please input password");
                 passwordInput.requestFocus();
             } else {
-                // Gọi LiveData để kiểm tra thông tin người dùng
                 userViewModel.getUserByUsernameAndPassword(username, password).observe(this, user -> {
                     if (user == null) {
                         txterr.setText("Email or password is incorrect");
