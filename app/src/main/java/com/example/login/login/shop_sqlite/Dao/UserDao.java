@@ -14,6 +14,7 @@ import java.util.List;
 
 @Dao
 public interface UserDao {
+
     @Insert
     void insert(User user);
     @Query("SELECT * FROM User WHERE username = :name and password =:pass")
@@ -21,9 +22,6 @@ public interface UserDao {
 
     @Update
     void update(User user);
-
-
-
 }
 
 

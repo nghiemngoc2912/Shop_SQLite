@@ -130,6 +130,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             intent.putExtra("product", product);
             context.startActivity(intent);
         });
+
     }
 
     @Override

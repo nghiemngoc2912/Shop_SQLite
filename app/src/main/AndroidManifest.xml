@@ -16,8 +16,10 @@
         <activity android:name=".Activity.EditProductActivity"/>
         <activity android:name=".Activity.CardActivity"/>
         <activity android:name=".Activity.ProductDetailActivity"/>
+        <activity android:name=".Activity.UpdateProductActivity"/>
+        <activity android:name=".Activity.ProductListActivity"/>
         <activity
-            android:name=".Activity.ProductListActivity"
+            android:name=".Activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
