@@ -13,7 +13,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.login.login.shop_sqlite.Entity.CartItem;
-import com.example.login.login.shop_sqlite.Entity.CartProduct;
 import com.example.login.login.shop_sqlite.Entity.Product;
 import com.example.login.login.shop_sqlite.R;
 import com.example.login.login.shop_sqlite.ViewModel.CartItemViewModel;
@@ -39,7 +38,7 @@ public class AddProductActivity extends AppCompatActivity {
         etQuantity = findViewById(R.id.et_product_quantity);
         etDescription = findViewById(R.id.et_product_description);
         etImage = findViewById(R.id.et_product_image);
-        btnAdd = findViewById(R.id.btn_add_product);
+        btnAdd = findViewById(R.id.btn_edit_product);
         btnView =findViewById(R.id.btn_products);
 
         btnView.setOnClickListener(new View.OnClickListener() {

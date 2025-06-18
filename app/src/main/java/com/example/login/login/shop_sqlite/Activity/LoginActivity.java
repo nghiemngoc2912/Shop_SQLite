@@ -15,6 +15,7 @@ import com.example.login.login.shop_sqlite.ViewModel.UserViewModel;
 
 public class LoginActivity extends AppCompatActivity {
 
+    public static String username = null;
     private EditText emailInput, passwordInput;
     private TextView txterr;
     private UserViewModel userViewModel;
@@ -66,6 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         Intent intent = new Intent(LoginActivity.this, ProductListActivity.class);
                         intent.putExtra("username", user.username);
+                        LoginActivity.username = user.username;
                         startActivity(intent);
                         finish();
                     }

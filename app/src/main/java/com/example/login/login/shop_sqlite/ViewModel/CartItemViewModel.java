@@ -7,20 +7,13 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.login.login.shop_sqlite.Activity.ProductListActivity;
 import com.example.login.login.shop_sqlite.DataHelper.AppDatabase;
 import com.example.login.login.shop_sqlite.Dao.CartItemDao;
-import com.example.login.login.shop_sqlite.DataHelper.Constanst;
 import com.example.login.login.shop_sqlite.Entity.CartItem;
 import com.example.login.login.shop_sqlite.Entity.CartProduct;
-import com.example.login.login.shop_sqlite.Entity.Product;
 
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

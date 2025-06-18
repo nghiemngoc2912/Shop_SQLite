@@ -1,28 +1,22 @@
 package com.example.login.login.shop_sqlite.Adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.login.login.shop_sqlite.Activity.EditProductActivity;
 import com.example.login.login.shop_sqlite.Activity.ProductDetailActivity;
-import com.example.login.login.shop_sqlite.Activity.UpdateProductActivity;
-import com.example.login.login.shop_sqlite.DataHelper.Constanst;
-import com.example.login.login.shop_sqlite.Entity.CartProduct;
 import com.example.login.login.shop_sqlite.Entity.Product;
 import com.example.login.login.shop_sqlite.R;
 import com.example.login.login.shop_sqlite.ViewModel.CartItemViewModel;
@@ -38,18 +32,25 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     private List<Product> productList = new ArrayList<>();
     private CartItemViewModel cartItemViewModel;
     onCartChange listener;
-    public interface onCartChange{
+
+    OnProductChangeListener productChangeListener;
+    public interface onCartChange {
         public void addToCard(Product product);
     }
 
+    public interface OnProductChangeListener {
+        void onProductChange(Product product);
+        void onDeleteProduct(Product product);
+    }
     public void setProductList(List<Product> list) {
         this.productList = list;
         notifyDataSetChanged();
     }
 
-    public ProductAdapter(onCartChange listener){
+    public ProductAdapter(onCartChange listener, OnProductChangeListener productChangeListener){
        // this.cartItemViewModel=cartItemViewModel;
         this.listener = listener;
+        this.productChangeListener = productChangeListener;
     }
 
     @NonNull
@@ -62,7 +63,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
         NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
         String formattedPrice = formatter.format(product.price*1000);
@@ -87,6 +88,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                         .setPositiveButton("Xoá", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                productChangeListener.onDeleteProduct(productList.get(holder.getAdapterPosition()));
                                 productList.remove(holder.getAdapterPosition());
                                 notifyItemRemoved(holder.getAdapterPosition());
                             }
@@ -109,25 +111,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
             }
         });
-        holder.btnAddToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(holder.itemView.getContext(), product.id+product.name, Toast.LENGTH_LONG).show();
-                listener.addToCard(productList.get(position));
-            }
+        holder.btnCart.setOnClickListener((v)->{
+            this.listener.addToCard(product);
         });
-        holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Context context = v.getContext();
+        holder.btnEdit.setOnClickListener((v)->{
+            Context context = v.getContext();
 
-                // Tạo Intent để mở ProductDetailActivity
-                Intent intent = new Intent(context, UpdateProductActivity.class);
+            // Tạo Intent để mở ProductDetailActivity
+            Intent intent = new Intent(context, EditProductActivity.class);
 
-                // Gửi thêm dữ liệu sản phẩm (ví dụ: product ID)
-                intent.putExtra("product_id", product.id);
-                context.startActivity(intent);
-            }
+            // Gửi thêm dữ liệu sản phẩm (ví dụ: product ID)
+            intent.putExtra("product", product);
+            context.startActivity(intent);
         });
 
     }
@@ -140,7 +135,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     static class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView tvId, tvName, tvPrice;//, tvDescription;
         ImageView imgProduct;
-        Button btViewDetail, btnDelete,btnAddToCart,btnUpdate;
+        ImageButton btViewDetail, btnDelete, btnEdit, btnCart;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -151,8 +146,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             imgProduct = itemView.findViewById(R.id.img_product);
             btnDelete=itemView.findViewById(R.id.btn_delete);
             btViewDetail=itemView.findViewById(R.id.btn_view_detail);
-            btnAddToCart=itemView.findViewById(R.id.btnAddToCart);
-            btnUpdate=itemView.findViewById(R.id.btnUpdate);
+            btnCart=itemView.findViewById(R.id.btn_cart);
+            btnEdit=itemView.findViewById(R.id.btn_edit);
         }
     }
 }

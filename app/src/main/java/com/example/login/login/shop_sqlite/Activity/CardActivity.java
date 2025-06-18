@@ -1,9 +1,6 @@
 package com.example.login.login.shop_sqlite.Activity;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,19 +8,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.login.login.shop_sqlite.Adapter.CardAdapter;
-import com.example.login.login.shop_sqlite.DataHelper.Constanst;
-import com.example.login.login.shop_sqlite.Entity.CartItem;
 import com.example.login.login.shop_sqlite.Entity.CartProduct;
 import com.example.login.login.shop_sqlite.ViewModel.CartItemViewModel;
 import com.example.login.login.shop_sqlite.R;
@@ -70,7 +62,7 @@ public class CardActivity extends AppCompatActivity {
 
             }
         });
-        cartItemViewModel.getCartProduct(Constanst.userName).observe(this, adapter::setProductList);
+        cartItemViewModel.getCartProduct(LoginActivity.username).observe(this, adapter::setProductList);
         recyclerCart.setLayoutManager(new LinearLayoutManager(this));
         recyclerCart.setAdapter(adapter);
 
@@ -78,12 +70,12 @@ public class CardActivity extends AppCompatActivity {
 
 
         btnCheckout.setOnClickListener(v -> {
-            List<CartProduct> currentList = cartItemViewModel.getCartProduct(Constanst.userName).getValue();
+            List<CartProduct> currentList = cartItemViewModel.getCartProduct(LoginActivity.username).getValue();
             int count = (currentList != null) ? currentList.size() : 0;
             if( count==0)
             Toast.makeText(this, "Bạn chưa có sản phẩm nào, Pls chọn sản phẩm...", Toast.LENGTH_SHORT).show();
             else {
-                cartItemViewModel.deleteByUser(Constanst.userName);
+                cartItemViewModel.deleteByUser(LoginActivity.username);
             }
             startActivity(new Intent(this, ProductListActivity.class));
         });
@@ -93,7 +85,7 @@ public class CardActivity extends AppCompatActivity {
 
     private void calculateTotal() {
 
-        cartItemViewModel.getCartProduct(Constanst.userName).observe(this, new Observer<List<CartProduct>>() {
+        cartItemViewModel.getCartProduct(LoginActivity.username).observe(this, new Observer<List<CartProduct>>() {
             @Override
             public void onChanged(List<CartProduct> list) {
                 int sum=0;
