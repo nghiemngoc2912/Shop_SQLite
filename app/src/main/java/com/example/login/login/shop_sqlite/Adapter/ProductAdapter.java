@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.login.login.shop_sqlite.Activity.EditProductActivity;
 import com.example.login.login.shop_sqlite.Activity.ProductDetailActivity;
 import com.example.login.login.shop_sqlite.DataHelper.Constanst;
 import com.example.login.login.shop_sqlite.Entity.CartProduct;
@@ -36,18 +38,25 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     private List<Product> productList = new ArrayList<>();
     private CartItemViewModel cartItemViewModel;
     onCartChange listener;
+
+    OnProductChangeListener productChangeListener;
     public interface onCartChange{
         public void addToCard(Product product);
     }
 
+    public interface OnProductChangeListener {
+        void onProductChange(Product product);
+        void onDeleteProduct(Product product);
+    }
     public void setProductList(List<Product> list) {
         this.productList = list;
         notifyDataSetChanged();
     }
 
-    public ProductAdapter(onCartChange listener){
+    public ProductAdapter(onCartChange listener, OnProductChangeListener productChangeListener){
        // this.cartItemViewModel=cartItemViewModel;
         this.listener = listener;
+        this.productChangeListener = productChangeListener;
     }
 
     @NonNull
@@ -85,6 +94,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                         .setPositiveButton("Xoá", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                productChangeListener.onDeleteProduct(productList.get(holder.getAdapterPosition()));
                                 productList.remove(holder.getAdapterPosition());
                                 notifyItemRemoved(holder.getAdapterPosition());
                             }
@@ -107,7 +117,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
             }
         });
+        holder.btnCart.setOnClickListener((v)->{
 
+        });
+        holder.btnEdit.setOnClickListener((v)->{
+            Context context = v.getContext();
+
+            // Tạo Intent để mở ProductDetailActivity
+            Intent intent = new Intent(context, EditProductActivity.class);
+
+            // Gửi thêm dữ liệu sản phẩm (ví dụ: product ID)
+            intent.putExtra("product", product);
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -118,7 +140,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     static class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView tvId, tvName, tvPrice;//, tvDescription;
         ImageView imgProduct;
-        Button btViewDetail, btnDelete;
+        ImageButton btViewDetail, btnDelete, btnEdit, btnCart;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -129,7 +151,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             imgProduct = itemView.findViewById(R.id.img_product);
             btnDelete=itemView.findViewById(R.id.btn_delete);
             btViewDetail=itemView.findViewById(R.id.btn_view_detail);
-
+            btnCart=itemView.findViewById(R.id.btn_cart);
+            btnEdit=itemView.findViewById(R.id.btn_edit);
         }
     }
 }

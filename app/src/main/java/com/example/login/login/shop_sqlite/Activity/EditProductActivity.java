@@ -18,41 +18,50 @@ import com.example.login.login.shop_sqlite.R;
 import com.example.login.login.shop_sqlite.ViewModel.CartItemViewModel;
 import com.example.login.login.shop_sqlite.ViewModel.ProductViewModel;
 
-public class AddProductActivity extends AppCompatActivity {
+import java.util.Objects;
 
+public class EditProductActivity extends AppCompatActivity {
     private EditText etName, etPrice, etQuantity, etDescription, etImage;
-    private Button btnAdd, btnView;
+    private Button btnEdit, btnView;
     private ProductViewModel productViewModel;
+
+    private Product currentProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_product);
+        setContentView(R.layout.activity_edit_product);
+        currentProduct=(Product) Objects.requireNonNull(getIntent().getSerializableExtra("product"));
 
         // Khởi tạo ViewModel
         productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
 
         // Ánh xạ view
         etName = findViewById(R.id.et_product_name);
+        etName.setText(currentProduct.name);
         etPrice = findViewById(R.id.et_product_price);
+        etPrice.setText(String.valueOf(currentProduct.price));
         etQuantity = findViewById(R.id.et_product_quantity);
+        etQuantity.setText(String.valueOf(currentProduct.quantity));
         etDescription = findViewById(R.id.et_product_description);
+        etDescription.setText(currentProduct.description);
         etImage = findViewById(R.id.et_product_image);
-        btnAdd = findViewById(R.id.btn_edit_product);
+        etImage.setText(currentProduct.image);
+        btnEdit = findViewById(R.id.btn_edit_product);
         btnView =findViewById(R.id.btn_products);
 
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddProductActivity.this, ProductListActivity.class);
+                Intent intent = new Intent(EditProductActivity.this, ProductListActivity.class);
                 startActivity(intent);
             }
         });
 
-        btnAdd.setOnClickListener(v -> addProduct());
+        btnEdit.setOnClickListener(v -> updateProduct());
     }
 
-    private void addProduct() {
+    private void updateProduct() {
         String name = etName.getText().toString().trim();
         String priceStr = etPrice.getText().toString().trim();
         String quantityStr = etQuantity.getText().toString().trim();
@@ -70,7 +79,8 @@ public class AddProductActivity extends AppCompatActivity {
             int quantity = Integer.parseInt(quantityStr);
 
             Product product = new Product(name, price, description, quantity, image);
-            productViewModel.insert(product);
+            product.id = currentProduct.id;
+            productViewModel.update(product);
 
             Toast.makeText(this, "Đã thêm sản phẩm", Toast.LENGTH_SHORT).show();
             finish(); // Đóng activity sau khi thêm xong

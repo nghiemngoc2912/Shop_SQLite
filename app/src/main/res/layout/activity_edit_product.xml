@@ -82,7 +82,7 @@
         android:id="@+id/btn_edit_product"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Thêm Sản Phẩm"
+        android:text="Lưu"
         app:layout_constraintTop_toBottomOf="@id/et_product_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintHorizontal_chainStyle="spread"

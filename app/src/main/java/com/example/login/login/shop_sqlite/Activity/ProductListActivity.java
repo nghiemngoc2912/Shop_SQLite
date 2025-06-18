@@ -56,6 +56,17 @@ public class ProductListActivity extends AppCompatActivity {
             public void addToCard(Product product) {
                 addItem(product.id, Constanst.userName);
             }
+        }, new ProductAdapter.OnProductChangeListener() {
+
+            @Override
+            public void onProductChange(Product product) {
+                productViewModel.update(product);
+            }
+
+            @Override
+            public void onDeleteProduct(Product product) {
+                productViewModel.deleteById(product.id);
+            }
         });
         recyclerView.setAdapter(productAdapter);
 
