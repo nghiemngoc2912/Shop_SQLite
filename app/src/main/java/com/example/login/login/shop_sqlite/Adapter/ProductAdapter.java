@@ -3,26 +3,20 @@ package com.example.login.login.shop_sqlite.Adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.login.login.shop_sqlite.Activity.EditProductActivity;
 import com.example.login.login.shop_sqlite.Activity.ProductDetailActivity;
-import com.example.login.login.shop_sqlite.DataHelper.Constanst;
-import com.example.login.login.shop_sqlite.Entity.CartProduct;
 import com.example.login.login.shop_sqlite.Entity.Product;
 import com.example.login.login.shop_sqlite.R;
 import com.example.login.login.shop_sqlite.ViewModel.CartItemViewModel;
@@ -40,7 +34,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     onCartChange listener;
 
     OnProductChangeListener productChangeListener;
-    public interface onCartChange{
+    public interface onCartChange {
         public void addToCard(Product product);
     }
 
@@ -118,7 +112,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             }
         });
         holder.btnCart.setOnClickListener((v)->{
-
+            this.listener.addToCard(product);
         });
         holder.btnEdit.setOnClickListener((v)->{
             Context context = v.getContext();

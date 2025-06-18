@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -19,9 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.login.login.shop_sqlite.Adapter.ProductAdapter;
-import com.example.login.login.shop_sqlite.DataHelper.Constanst;
 import com.example.login.login.shop_sqlite.Entity.CartItem;
-import com.example.login.login.shop_sqlite.Entity.CartProduct;
 import com.example.login.login.shop_sqlite.Entity.Product;
 import com.example.login.login.shop_sqlite.R;
 import com.example.login.login.shop_sqlite.ViewModel.CartItemViewModel;
@@ -54,7 +51,8 @@ public class ProductListActivity extends AppCompatActivity {
         productAdapter = new ProductAdapter(new ProductAdapter.onCartChange() {
             @Override
             public void addToCard(Product product) {
-                addItem(product.id, Constanst.userName);
+                addItem(product.id, LoginActivity.username);
+                Toast.makeText(ProductListActivity.this, "Added to Cart.", Toast.LENGTH_SHORT).show();
             }
         }, new ProductAdapter.OnProductChangeListener() {
 
