@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Tiêu đề -->
+    <TextView
+        android:id="@+id/tv_add_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Thêm Sản Phẩm Mới"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Tên sản phẩm -->
+    <EditText
+        android:id="@+id/et_product_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Tên sản phẩm"
+        app:layout_constraintTop_toBottomOf="@id/tv_add_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Giá -->
+    <EditText
+        android:id="@+id/et_product_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Giá"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/et_product_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"/>
+
+    <!-- Số lượng -->
+    <EditText
+        android:id="@+id/et_product_quantity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Số lượng"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@id/et_product_price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"/>
+
+    <!-- Mô tả -->
+    <EditText
+        android:id="@+id/et_product_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Mô tả sản phẩm"
+        android:inputType="textMultiLine"
+        android:minLines="3"
+        app:layout_constraintTop_toBottomOf="@id/et_product_quantity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"/>
+
+    <!-- Ảnh sản phẩm -->
+    <EditText
+        android:id="@+id/et_product_image"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="URL hình ảnh"
+        app:layout_constraintTop_toBottomOf="@id/et_product_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"/>
+
+    <!-- Nút Thêm -->
+    <Button
+        android:id="@+id/btn_add_product"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Thêm Sản Phẩm"
+        app:layout_constraintTop_toBottomOf="@id/et_product_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        android:layout_marginTop="20dp"/>
+    <Button
+        android:id="@+id/btn_products"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="View Products"
+        app:layout_constraintTop_toBottomOf="@id/et_product_image"
+        app:layout_constraintStart_toEndOf="@id/btn_add_product"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

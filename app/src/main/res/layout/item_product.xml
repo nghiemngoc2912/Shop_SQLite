@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:elevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp">
+
+        <!-- Product Image -->
+        <ImageView
+            android:id="@+id/img_product"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <!-- Product ID -->
+        <TextView
+            android:id="@+id/tv_product_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID: 1"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="4dp"
+            app:layout_constraintStart_toEndOf="@id/img_product"
+            app:layout_constraintTop_toTopOf="@id/img_product"
+            />
+
+        <!-- Product Name -->
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên sản phẩm"
+            android:layout_marginLeft="4dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/tv_product_id"
+            app:layout_constraintTop_toBottomOf="@id/tv_product_id"
+           />
+
+        <!-- Product Price -->
+        <TextView
+            android:id="@+id/tv_product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="Giá: 0đ"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/tv_product_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_product_name"
+         />
+
+        <!-- View Detail Button -->
+        <Button
+            android:id="@+id/btn_view_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="View Detail"
+            app:layout_constraintStart_toStartOf="@id/tv_product_price"
+            app:layout_constraintTop_toBottomOf="@id/tv_product_price"
+          />
+
+        <!-- Add to Cart Button -->
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            app:layout_constraintStart_toEndOf="@id/btn_view_detail"
+            app:layout_constraintTop_toTopOf="@id/btn_view_detail"
+         />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.cardview.widget.CardView-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_margin="8dp"-->
+<!--    android:elevation="4dp">-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:padding="12dp">-->
+
+<!--        &lt;!&ndash; Image &ndash;&gt;-->
+<!--        <ImageView-->
+<!--            android:id="@+id/img_product"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="150dp"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            android:src="@drawable/ic_launcher_background" />-->
+
+<!--        &lt;!&ndash; Product info &ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="vertical"-->
+<!--            android:layout_marginStart="12dp">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_product_id"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="ID: 1"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_product_name"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Tên sản phẩm"-->
+<!--                android:textSize="18sp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_product_price"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Giá: 0đ"-->
+<!--                android:textSize="16sp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tv_product_description"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:text="Mô tả sản phẩm..."-->
+<!--                android:textSize="14sp" />-->
+<!--        </LinearLayout>-->
+
+<!--    </LinearLayout>-->
+<!--</androidx.cardview.widget.CardView>-->
