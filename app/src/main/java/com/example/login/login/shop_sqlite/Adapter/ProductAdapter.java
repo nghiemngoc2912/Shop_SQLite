@@ -1,5 +1,6 @@
 package com.example.login.login.shop_sqlite.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.login.login.shop_sqlite.Activity.ProductDetailActivity;
+import com.example.login.login.shop_sqlite.Activity.UpdateProductActivity;
 import com.example.login.login.shop_sqlite.DataHelper.Constanst;
 import com.example.login.login.shop_sqlite.Entity.CartProduct;
 import com.example.login.login.shop_sqlite.Entity.Product;
@@ -60,7 +62,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProductViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Product product = productList.get(position);
         NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
         String formattedPrice = formatter.format(product.price*1000);
@@ -107,6 +109,26 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
             }
         });
+        holder.btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(holder.itemView.getContext(), product.id+product.name, Toast.LENGTH_LONG).show();
+                listener.addToCard(productList.get(position));
+            }
+        });
+        holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+
+                // Tạo Intent để mở ProductDetailActivity
+                Intent intent = new Intent(context, UpdateProductActivity.class);
+
+                // Gửi thêm dữ liệu sản phẩm (ví dụ: product ID)
+                intent.putExtra("product_id", product.id);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -118,7 +140,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     static class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView tvId, tvName, tvPrice;//, tvDescription;
         ImageView imgProduct;
-        Button btViewDetail, btnDelete;
+        Button btViewDetail, btnDelete,btnAddToCart,btnUpdate;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -129,7 +151,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             imgProduct = itemView.findViewById(R.id.img_product);
             btnDelete=itemView.findViewById(R.id.btn_delete);
             btViewDetail=itemView.findViewById(R.id.btn_view_detail);
-
+            btnAddToCart=itemView.findViewById(R.id.btnAddToCart);
+            btnUpdate=itemView.findViewById(R.id.btnUpdate);
         }
     }
 }

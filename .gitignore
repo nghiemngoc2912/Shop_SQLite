@@ -21,6 +21,8 @@ build/
 !gradle-wrapper.jar
 .gradle-cache/
 gradle-app.setting
+.gradle/
+gradle/
 
 # Local configuration file (SDK path, etc)
 local.properties
