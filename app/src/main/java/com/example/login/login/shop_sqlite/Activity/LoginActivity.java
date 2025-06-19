@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.login.login.shop_sqlite.DataHelper.Constanst;
 import com.example.login.login.shop_sqlite.Entity.User;
 import com.example.login.login.shop_sqlite.R;
 import com.example.login.login.shop_sqlite.ViewModel.UserViewModel;
@@ -64,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (user == null) {
                         txterr.setText("Email or password is incorrect");
                     } else {
+                        Constanst.userName = user.username;
                         Intent intent = new Intent(LoginActivity.this, ProductListActivity.class);
                         intent.putExtra("username", user.username);
                         startActivity(intent);
