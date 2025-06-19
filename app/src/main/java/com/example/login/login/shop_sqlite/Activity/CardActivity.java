@@ -76,16 +76,19 @@ public class CardActivity extends AppCompatActivity {
 
         calculateTotal();
 
-
         btnCheckout.setOnClickListener(v -> {
-            List<CartProduct> currentList = cartItemViewModel.getCartProduct(Constanst.userName).getValue();
-            int count = (currentList != null) ? currentList.size() : 0;
-            if( count==0)
-            Toast.makeText(this, "Bạn chưa có sản phẩm nào, Pls chọn sản phẩm...", Toast.LENGTH_SHORT).show();
-            else {
-                cartItemViewModel.deleteByUser(Constanst.userName);
-            }
-            startActivity(new Intent(this, ProductListActivity.class));
+            cartItemViewModel.getCartProduct(Constanst.userName).observe(this, list -> {
+                int count = (list != null) ? list.size() : 0;
+
+                if (count == 0) {
+                    Toast.makeText(this, "Bạn chưa có sản phẩm nào, vui lòng chọn sản phẩm...", Toast.LENGTH_SHORT).show();
+                } else {
+                    cartItemViewModel.deleteByUser(Constanst.userName);
+                    Toast.makeText(this, "Bạn đã checkout", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(this, ProductListActivity.class));
+                    finish();
+                }
+            });
         });
     }
 
